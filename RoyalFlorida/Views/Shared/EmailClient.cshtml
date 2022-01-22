@@ -1,0 +1,59 @@
+﻿@model RoyalFlorida.Models.Booking
+
+@{ 
+    var db = new RoyalFlorida.Models.ApplicationDbContext();
+}
+
+<h2></h2>
+
+<div>
+    <h4>Booking Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Beautician Name
+        </dt>
+
+        <dd>
+          @db.employees.Find(Model.EmployeeId).FirstName
+        </dd>
+
+        <dt>
+          Service Name
+        </dt>
+
+        <dd>
+           @db.services.Find(Model.ServiceId).Name
+        </dd>
+
+        <dt>
+           Start Time
+        </dt>
+
+        <dd>
+           @db.ServiceHours.Find(Model.ServiceHoursId).From
+        </dd>
+
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+          Date Of Service
+        </dt>
+
+        <dd>
+            @Model.RequestedDate.ToLongDateString();
+            
+        </dd>
+
+    </dl>
+</div>
+
+

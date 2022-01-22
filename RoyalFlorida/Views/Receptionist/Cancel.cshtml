@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Receptionist";
+    Layout = "~/Views/Shared/_LayoutReceptionist.cshtml";
+    var db = new RoyalFlorida.Models.ApplicationDbContext();
+}
+
+<h2 class="text-center">Cancelled Bookings</h2>
+
+@model IEnumerable<RoyalFlorida.Models.Booking>
+
+<table class="table">
+    <tr>
+        <th>
+            Employee
+        </th>
+        <th>
+            Service
+        </th>
+        <th>
+            Time
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceHours.From)
+            </td>
+
+
+            @if (item.UserId != null)
+            {
+                <td>
+                    <span> @db.Users.Find(item.UserId).FirstName</span>
+                </td>
+                <td>
+                    @db.Users.Find(item.UserId).LastName
+                </td>
+            }
+            else
+            {
+                <td>
+                    @item.FirstName
+                </td>
+                <td>
+                    @item.LastName
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @item.RequestedDate.ToLongDateString()
+            </td>
+
+        </tr>
+    }
+
+</table>

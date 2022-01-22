@@ -1,0 +1,140 @@
+﻿
+@{
+    Layout = null;
+}
+
+@{
+    var db = new RoyalFlorida.Models.ApplicationDbContext();
+
+}
+@model RoyalFlorida.Models.Booking
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Royal Florida</title>
+    <meta charset="utf-8">
+
+</head>
+<body>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="~/Content/Reciept.css" rel="stylesheet" />
+    <!------ Include the above in your HEAD tag ---------->
+
+    <form style="position:fixed;">
+        <input type="button" value="Print"
+               onclick="window.print()" />
+    </form>
+    <header>
+        <h1>Invoice</h1>
+        <address>
+            <p>finance@RoyalAdmin.com </p>
+            <p> 65 Maud Mfusi,Durban Central, Durban 4001 </p>
+            <p> P: 1-800-961-4952 </p>
+            <p> Business Number: 0-808-234-2380 </p>
+        </address>
+
+    </header>
+    <article>
+        <h1>Recipient</h1>
+        <address class="norm">
+            <p><strong>Jan Denean Banister</strong></p>
+            <p> name@client.com <br>
+            <p> 1613 bethany church road,belton,South <br>
+            <p> Carolina,29627,USA <br>
+            <p> Phone: 1-864-933-0793</p>
+        </address>
+
+        <table class="meta">
+            <tr>
+                <th><span>Invoice #</span></th>
+                <td><span>101138</span></td>
+            </tr>
+            <tr>
+                <th><span>Date</span></th>
+                <td><span>@DateTime.Now.ToLongDateString()</span></td>
+            </tr>
+            <tr>
+                <th><span>Amount Due</span></th>
+                <td><span id="prefix">R</span><span>@Model.Service.BasicCost</span></td>
+            </tr>
+        </table>
+        <table class="inventory">
+            <thead>
+                <tr>
+
+                    <th>
+                        <span>
+                            Employee
+                        </span>
+                    </th>
+                    <th>
+                        <span>
+                            service
+                        </span>
+                    </th>
+                    <th>
+                        <span>
+                            start time
+                        </span>
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreationDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RequestedDate)
+                    </th>
+                    <th>
+                        <span>
+                            Actual start Time
+                        </span>
+                    </th>
+                    <th>
+                        <span>
+                            Actual Finish Time
+                        </span>
+                    </th>
+                    <th><span>Amount</span></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span> @Model.Employee.FirstName</span></td>
+                    <td><span>@Model.Service.Name</span></td>
+                    <td><span>@Model.ServiceHours.From.ToLongTimeString()</span></td>
+                    <td><span>@Model.CreationDate.ToShortDateString()</span></td>
+                    <td><span>@Model.RequestedDate.ToShortDateString()</span></td>
+                    <td><span>@db.checkIns.FirstOrDefault(x => x.BookingId == Model.BookingId).CheckedIn.ToShortTimeString()</span></td>
+                    <td><span>@db.checkIns.FirstOrDefault(x => x.BookingId == Model.BookingId).CheckedOut.ToShortTimeString()</span></td>
+                    <td><span data-prefix>R</span><span>@Model.Service.BasicCost</span></td>
+
+                </tr>
+            </tbody>
+        </table>
+        <table class="sign">
+            <tr>
+            </tr>
+        </table>
+
+        <table class="balance">
+            <tr>
+                <th><span>Total</span></th>
+                <td><span data-prefix>R</span><span>@Model.Service.BasicCost</span></td>
+            </tr>
+        </table>
+    </article>
+    <aside>
+        <h1><span>Thank You Please Call Again</span></h1>
+        <div>
+            <p>We offer limited 10 days refund policy and 30 days workmanship warranty on all of our services. For more details, please read our refund policy below.</p>
+        </div>
+    </aside>
+    <td>
+        <a class="btn btn-primary" href="/Home/Receptionist/">Go Back</a>
+    </td>
+</body>
+</html>
+

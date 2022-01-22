@@ -1,0 +1,114 @@
+﻿@model RoyalFlorida.Models.Booking
+
+@{
+    ViewBag.Title = "Booking";
+    Layout = "~/Views/Shared/_LayoutReceptionist.cshtml";
+    var db = new RoyalFlorida.Models.ApplicationDbContext();
+}
+
+<h2>Booking</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Employee Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FirstName)
+        </dd>
+
+        <dt>
+            Service Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.Name)
+        </dd>
+
+        <dt>
+            Start Time
+        </dt>
+
+        <dd>
+            @Model.ServiceHours.From.ToShortTimeString()
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Model.CreationDate.ToLongDateString()
+        </dd>
+
+        @if (Model.UserId == null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+               @db.Users.Find(Model.UserId).FirstName
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @db.Users.Find(Model.UserId).LastName
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @db.Users.Find(Model.UserId).Email
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestedDate)
+        </dd>
+
+
+        
+
+    </dl>
+</div>
+

@@ -1,0 +1,16 @@
+﻿@{ 
+    var list = (List<RoyalFlorida.Models.ServiceHours>)ViewBag.SubcatOptions;
+}
+
+<option value="">--Select an Option--</option>
+@if (list != null)
+{
+
+    foreach (var item in list)
+    {
+
+        <option value="@item.ServiceHoursId"> @item.From.ToShortTimeString() - @item.To.ToShortTimeString() </option>
+
+    }
+
+}

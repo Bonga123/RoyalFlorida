@@ -1,0 +1,14 @@
+﻿
+
+<option value="">--Select an Option--</option>
+@if (ViewBag.SubcatOptions != null)
+{
+
+    foreach (var item in ViewBag.SubcatOptions)
+    {
+
+        <option value="@item.Value">@item.Text </option>
+
+    }
+
+}

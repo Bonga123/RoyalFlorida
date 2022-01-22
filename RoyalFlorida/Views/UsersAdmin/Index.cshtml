@@ -1,0 +1,94 @@
+﻿@model IEnumerable<RoyalFlorida.Models.ApplicationUser>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+            Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br/>
+<br/>
+
+
+    <br />
+    <div class="row">
+        <div class="col-lg-6">
+
+        </div>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-3">
+            <b>
+
+                @using (Html.BeginForm("Index", "UsersAdmin", FormMethod.Get))
+                {
+                    <b> search By:</b>
+                    @Html.RadioButton("SearchBy", "Email", true) <text>Email</text>
+                    @*@Html.RadioButton("SearchBy", "Company", true) <text>Company</text><br />*@
+
+                    @Html.TextBox("Search")<input type="submit" , value="Search" />
+
+                }
+        </div>
+
+        <br />
+    </div>
+    @*<p style="text-decoration:none" class="btn btn-success btn-sm">
+        @Html.ActionLink("ADD USER", "Create")
+    </p>*@
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRefCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SponsorRefCode)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+          
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+<tr>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>*@
+    @*<td>
+        @Html.DisplayFor(modelItem => item.MemberRefCode)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SponsorRefCode)
+    </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+   
+    <td>
+        <div style="text-decoration:none" class="btn btn-success ">
+            @Html.ActionLink("Update", "Edit", new { id = item.Id })
+        </div>|
+        <div style="text-decoration:none" class="btn btn-default">
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+        </div>|
+        <div style="text-decoration:none" class="btn btn-danger">
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </div>
+    </td>
+</tr>
+}
+
+    </table>

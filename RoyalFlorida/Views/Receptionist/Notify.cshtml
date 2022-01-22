@@ -1,0 +1,42 @@
+﻿@model IEnumerable<RoyalFlorida.Models.Vm.Emailvm>
+
+@{
+    ViewBag.Title = "Notify";
+    Layout = "~/Views/Shared/_LayoutReceptionist.cshtml";
+}
+
+<h2>Notify</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Emailaddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emailaddress)
+            </td>
+            <td>
+                @if (item.status)
+                {
+                    <span class="text-success">Sent successfuly</span>
+                }
+                else
+                {
+                    <span class="text-danger">Faild to send reminder</span>
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>
